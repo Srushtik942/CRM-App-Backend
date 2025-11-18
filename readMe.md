@@ -100,6 +100,8 @@ http://localhost:3000
 
 📌 API Documentation
 
+Examples:
+
 🔵 Leads API
 Create a Lead
 
@@ -141,4 +143,48 @@ POST /leads/:id/comments
 {
   "commentText": "Follow-up done."
 }
+```
+
+📊 Reporting API
+
+Closed Leads in Last 7 Days
+
+```
+GET /report/last-week
+
+```
+
+🧪 Testing (Postman / Thunder Client)
+
+```
+Recommended tests:
+
+Create lead
+
+Assign agent
+
+Add comment
+
+Apply filters
+
+Weekly closed report
+
+Pipeline report
+
+```
+
+📘 Conclusion
+
+```
+This backend provides:
+
+Efficient lead management
+
+Sales agent workflow
+
+Comment logging
+
+Reporting for weekly closures & pipeline health
+
+It is modular, scalable, and ready for integration with any frontend (React, Vue, Angular, etc.)
 ```
