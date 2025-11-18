@@ -66,29 +66,40 @@ CORS Support	cors
 
 1. Clone repository
 
+```
 git clone <repo-url>
 cd anvaya-backend
+```
 
 2. Install dependencies
 
+```
 npm install
+```
 
 3. Configure environment variables
 
 Create a .env file:
 
+```
 MONGO_URL=your-mongodb-connection-string
 PORT=3000
+```
 
 4. Start server
 
+```
 node index.js
+```
 
 Server runs at:
+```
 http://localhost:3000
+```
 
 
 📌 API Documentation
+
 🔵 Leads API
 Create a Lead
 
@@ -109,12 +120,25 @@ Get All Leads (with filters)
 
 GET /leads
 
+Query Options:
+
+```
+| Query      | Description                                      |
+| ---------- | ------------------------------------------------ |
+| salesAgent | Filter by agent ID                               |
+| status     | New, Contacted, Qualified, Proposal Sent, Closed |
+| source     | Referral, Website, Cold Call, Social Media       |
+| tags       | Comma-separated list                             |
+```
+
 🗨 Comments API
+
 Add Comment to Lead
 
 POST /leads/:id/comments
 
+```
 {
   "commentText": "Follow-up done."
 }
-
+```
