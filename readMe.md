@@ -93,6 +93,7 @@ http://localhost:3000
 Create a Lead
 
 POST /leads
+```
 {
   "name": "Sharanya",
   "source": "Referral",
@@ -102,6 +103,7 @@ POST /leads
   "timeToClose": 3,
   "priority": "High"
 }
+```
 
 Get All Leads (with filters)
 
