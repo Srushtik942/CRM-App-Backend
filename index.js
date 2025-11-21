@@ -20,7 +20,7 @@ require("dotenv").config();
 
 async function addLeads(newLead) {
     try{
-        const NewLeads = NewLead(newLead);
+        const NewLeads = new NewLead(newLead);
         const saveLeads = await NewLeads.save();
         console.log(saveLeads);
 
