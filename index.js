@@ -138,8 +138,10 @@ app.get("/leads", async (req, res) => {
 app.get("/leads/:newId",async(req,res)=>{
   try{
     const {newId} = req.params;
-    const response = await NewLead.findOne({_id:newId});
+    const response = await NewLead.findById(newId).populate("salesAgent", "name email");;
     console.log(response);
+
+    // const salesAgnetId = response.data
 
     if(!response){
       res.status(404).json({error:`No Lead found with this ${id}`});
@@ -151,6 +153,7 @@ app.get("/leads/:newId",async(req,res)=>{
     res.status(500).json({message:"Internal Server Error",error:error.message});
   }
 })
+
 
 // edit leads data
 
