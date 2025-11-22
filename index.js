@@ -116,7 +116,7 @@ app.get("/leads", async (req, res) => {
 
     // Fetch Leads with Filter
 
-    const leads = await NewLead.find(filter).populate("salesAgent", "name email");
+    const leads = await NewLead.find(filter).populate("salesAgent", "name , email");
 
     res.status(200).json({
       message: "Successfully fetched leads",
@@ -132,6 +132,25 @@ app.get("/leads", async (req, res) => {
   }
 });
 
+
+// get leads by id
+
+app.get("/leads/:newId",async(req,res)=>{
+  try{
+    const {newId} = req.params;
+    const response = await NewLead.findOne({_id:newId});
+    console.log(response);
+
+    if(!response){
+      res.status(404).json({error:`No Lead found with this ${id}`});
+    }
+
+    res.status(201).json({message:"Lead fetched successfully!",response});
+
+  }catch(error){
+    res.status(500).json({message:"Internal Server Error",error:error.message});
+  }
+})
 
 // edit leads data
 
