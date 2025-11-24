@@ -6,6 +6,7 @@ const cors = require("cors");
 const NewAgents = require('./models/salesAgent.model');
 const NewLead = require('./models/lead.model');
 const Comments = require('./models/comment.model');
+const salesAgentModel = require('./models/salesAgent.model');
 const corsOptions = {
   origin: "*",
   credentials: true,
@@ -323,8 +324,10 @@ app.get("/leads/:id/comments",async(req,res)=>{
     console.log(findId);
 
     if(findId){
-      const resultData = await Comments.find();
+      const resultData = await Comments.find({lead:id}).populate('author',"name");
       console.log(resultData);
+
+
 
     if(resultData.length === 0){
       res.status(404).json({error:"Comments are not found!"});
