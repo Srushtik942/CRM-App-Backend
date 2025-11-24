@@ -381,6 +381,23 @@ app.get("/report/pipeline",async(req,res)=>{
   }
 })
 
+// total closed leads
+app.get("/report/pipeline/closed",async(req,res)=>{
+  try{
+    const closedResponse = await NewLead.find({status: {$eq: "Closed"}});
+    console.log(closedResponse);
+
+    if(closedResponse.length === 0){
+      res.status(404).json({error:"closed leads not found!"});
+    }
+
+    res.status(200).json({closedResponse: closedResponse.length})
+
+  }catch(error){
+    res.status(500).json({message:"Internal Server Error!",error: error.message});
+  }
+})
+
 
 const PORT = 3000;
 app.listen(PORT,()=>{
