@@ -399,6 +399,39 @@ app.get("/report/pipeline/closed",async(req,res)=>{
 })
 
 
+// leads by status
+
+app.get("/report/closed-by-agent", async (req, res) => {
+  try {
+    const leads = await NewLead.find({ status: "Closed" })
+      .populate("salesAgent", "name");
+
+    const agentMap = {};
+
+    leads.forEach(lead => {
+      if (!lead.salesAgent) return;
+
+      const agentName = lead.salesAgent.name;
+
+      if (!agentMap[agentName]) {
+        agentMap[agentName] = 0;
+      }
+
+      agentMap[agentName] += 1;
+    });
+
+    res.status(200).json({ closedByAgent: agentMap });
+
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal Server Error",
+      error: error.message
+    });
+  }
+});
+
+
+
 const PORT = 3000;
 app.listen(PORT,()=>{
     console.log(`Server is running on port ${PORT}`);
