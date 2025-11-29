@@ -67,7 +67,7 @@ app.post("/leads",async(req,res)=>{
 
 app.get("/leads", async (req, res) => {
   try {
-    const { salesAgent, status, tags, source } = req.query;
+    const { salesAgent, status, tags, source, priority } = req.query;
 
     // Build dynamic filter object
     let filter = {};
@@ -114,6 +114,19 @@ app.get("/leads", async (req, res) => {
 
       filter.tags = { $in: tagArray };
     }
+
+    // filter by priority
+
+    const prorityArray = ["High","Medium","Low"];
+    if(priority){
+      if(!prorityArray){
+        return res.status(400).json({
+          error: "Invalid source value",
+        });
+      }
+      filter.priority = priority
+    }
+
 
     // Fetch Leads with Filter
 
